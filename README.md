@@ -49,8 +49,11 @@ http://localhost:8080/swagger-ui/index.html#
   * 400 Bad Request: Missing/invalid fields or user already exists.
 ## User Login (/auth/login)
  * Method: POST
- ## Description: Authenticates a user's credentials and returns a JWT for accessing protected endpoints.
-  * Request Body:
+ ## Description: 
+ ```
+ Authenticates a user's credentials and returns a JWT for accessing protected endpoints.
+```
+ * Request Body:
   * email: The user's email address.
   * password: The user's password.
 ## Responses:
@@ -59,10 +62,55 @@ http://localhost:8080/swagger-ui/index.html#
 
 ## Logout (/auth/logout)
   * Method: GET
-## Description: Invalidates the user's current JWT, effectively logging them out.
+## Description: 
+```
+Invalidates the user's current JWT, effectively logging them out.
+```
 ## Headers:
  * Authorization: Bearer <JWT>
 ## Responses:
  * 200 OK: Logout successful.
  * 401 Unauthorized: Missing or invalid JWT.
 
+## Get Available APIs (/api/entries)
+ * Method: GET
+## Description: 
+```
+This endpoint allows users to retrieve a list of APIs. Users can optionally filter the results by category and limit the number of entries returned.
+```
+## Parameters:
+ ## category (optional, query): Filters the APIs by the specified category.
+ * Type: string
+ * Required: No
+## limit (optional, query): Limits the number of API entries returned.
+ * Type: integer
+ * Required: No
+## Responses:
+```
+ * 200 OK
+ * Description: Successful operation. Returns a list of API entries that match the specified criteria.
+ * 401 Unauthorized
+ * Description: Not Authorized !! User is not authenticated or does not have permission to access the requested resources.
+```
+## Fetch Ethereum Account Balance (/api/balance/{address})
+ * Method: GET
+## Description: 
+```
+This endpoint allows users to fetch the Ethereum account balance using the Ethereum wallet address.
+It provides a quick way to retrieve the current balance in Ether for a specified account.
+```
+## Parameters:
+```
+address (required, path): The Ethereum wallet address for which the balance is to be retrieved.
+Type: string
+Required: Yes
+```
+## Responses:
+```
+200 OK
+Description: Balance Successfully Retrieved. The request has succeeded, and the
+response contains the account balance for the specified Ethereum address.
+
+401 Unauthorized
+Description: Not Authorized !! User is not authenticated or does not have permission to access the requested resource.
+```
