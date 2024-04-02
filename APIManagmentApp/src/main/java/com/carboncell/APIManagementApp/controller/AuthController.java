@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name="Auth Management", description="managing User Login")
+@Tag(name="Authentication Management", description="managing User Login and logout")
 @AllArgsConstructor
 public class AuthController {
 
@@ -34,12 +34,9 @@ public class AuthController {
 
     private final ITokenService tokenService;
 
-//    private final Logger logger = LoggerFactory.getLogger(AuthController.class);
-
-    @Operation(summary = "Register User Login")
+    @Operation(summary = "Authenticates a user's credentials and returns a JWT for accessing protected endpoints.")
     @ApiResponse(responseCode = "200", description = "Login Successfully")
-    @ApiResponse(responseCode = "401", description = "Not Authorized !!")
-    @ApiResponse(responseCode = "208", description = "Your are already Login plz logout first than try to login !!")
+    @ApiResponse(responseCode = "401", description = "Incorrect email or password")
     @PostMapping("/login")
     public ResponseEntity<?>authenticateUser(@Parameter(name = "User Login",description = "Enter Your Registered Email and Password") @RequestBody LoginRequest loginRequest){
 
@@ -74,9 +71,9 @@ public class AuthController {
     }
 
 
-    @Operation(summary = "Register User Logout")
+    @Operation(summary = "Invalidates the user's current JWT, effectively logging them out")
     @ApiResponse(responseCode = "200", description = "Logout Successfull")
-    @ApiResponse(responseCode = "401", description = "Not Authorized !!")
+    @ApiResponse(responseCode = "401", description = " Missing or invalid JWT !!")
     @GetMapping("/logout")
     public ResponseEntity<String>LogoutUser(){
         return new ResponseEntity<>("User logged out successfully",HttpStatus.ACCEPTED);

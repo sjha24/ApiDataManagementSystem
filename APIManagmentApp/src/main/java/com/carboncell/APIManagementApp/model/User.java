@@ -38,7 +38,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        // Assuming 'id' is the primary key of User
         return Objects.hash(userId);
     }
 

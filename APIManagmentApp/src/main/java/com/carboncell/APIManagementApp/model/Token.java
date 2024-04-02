@@ -32,16 +32,12 @@ public class Token {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("token", token)
-                // Avoid recursion by not including user or other related entities directly
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        // Assuming 'id' is the primary key of Token
         return Objects.hash(id);
     }
-
-
 
 }

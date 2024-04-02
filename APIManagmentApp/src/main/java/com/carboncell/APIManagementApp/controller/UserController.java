@@ -18,8 +18,9 @@ public class UserController {
     @Autowired
     CustomUserDetailsService userDetailsService;
 
-    @Operation(summary = "New User Registration")
+    @Operation(summary = "Allows new users to create an account by providing their username, email, and password.")
     @ApiResponse(responseCode = "200", description = "Successfully User Register")
+    @ApiResponse(responseCode = "400", description = "Missing/invalid fields or user already exists.")
     @PostMapping("/register")
     public String registerUser(@Parameter(name = "User Details",description = "Fill Your Details for Registration") @RequestBody User user){
         return userDetailsService.addUser(user);
